@@ -9,7 +9,7 @@ import UIKit
 
 class MusicCategoriesViewController: UIViewController {
     private let toolbar = UIToolbar()
-    private let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 20))
+    //private let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 20))
 
     private let networkManager = NetworkManager()
     private var musicCategoriesCollection : CustomCollectionView!
@@ -23,15 +23,15 @@ class MusicCategoriesViewController: UIViewController {
     private func setup(){
         view.backgroundColor = AppColors.primaryColor
         self.toolbar.tintColor = AppColors.primaryTintColor
-        self.toolbar.barTintColor = .orange
+        self.toolbar.barTintColor = AppColors.secondaryTintColor
         view.addSubview(toolbar)
         toolbar.translatesAutoresizingMaskIntoConstraints = false
         
-        titleLabel.text = "Başlık"
+        /*titleLabel.text = "Başlık"
         titleLabel.textAlignment = .center
         let titleBarButton = UIBarButtonItem(customView: titleLabel)
         let flexibleSpaceBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        toolbar.setItems([flexibleSpaceBarButton, titleBarButton, flexibleSpaceBarButton], animated: false)
+        toolbar.setItems([flexibleSpaceBarButton, titleBarButton, flexibleSpaceBarButton], animated: false)*/
         NSLayoutConstraint.activate([
             toolbar.topAnchor.constraint(equalTo: view.topAnchor),
             toolbar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -54,9 +54,10 @@ class MusicCategoriesViewController: UIViewController {
                     self.musicCategoriesCollection.translatesAutoresizingMaskIntoConstraints = false
                     
                     self.view.addSubview(self.musicCategoriesCollection)
-                    
+                   
                     NSLayoutConstraint.activate([
                         self.musicCategoriesCollection.topAnchor.constraint(equalTo: self.toolbar.bottomAnchor),
+    
                         self.musicCategoriesCollection.widthAnchor.constraint(equalToConstant: self.view.frame.width),
                         self.musicCategoriesCollection.heightAnchor.constraint(equalToConstant: self.view.frame.height)
                     ])

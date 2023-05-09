@@ -8,7 +8,7 @@
 import UIKit
 
 class SplashViewController: UIViewController {
-
+    let tabBar = UITabBarController()
     let splashImage = CustomImageView(image: AppImages.appIconImage)
     
     override func viewDidLoad() {
@@ -21,7 +21,7 @@ class SplashViewController: UIViewController {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
           
-            let tabBar = UITabBarController()
+            
             let vc1 = MusicCategoriesViewController()
             let vc2 = FavoritesViewController()
             
@@ -29,11 +29,11 @@ class SplashViewController: UIViewController {
             
             vc2.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "suit.heart"), tag: 1)
             
-            tabBar.setViewControllers([vc1, vc2], animated: false)
-            tabBar.modalPresentationStyle = .fullScreen
-            tabBar.tabBar.backgroundColor = AppColors.secondaryPrimaryColor
-            tabBar.tabBar.tintColor = AppColors.primaryTintColor
-            self.present(tabBar, animated: true, completion: nil)
+            self.tabBar.setViewControllers([vc1, vc2], animated: false)
+            self.tabBar.modalPresentationStyle = .fullScreen
+            self.tabBar.tabBar.backgroundColor = AppColors.secondaryPrimaryColor
+            self.tabBar.tabBar.tintColor = AppColors.secondaryTintColor
+            self.present(self.tabBar, animated: true, completion: nil)
         }
     }
     private func setup(){

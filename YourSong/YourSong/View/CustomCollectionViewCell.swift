@@ -20,11 +20,12 @@ class CustomCollectionViewCell : UICollectionViewCell{
     let label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        //label.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 8
         label.textColor = AppColors.primaryTintColor
         label.font = UIFont.boldSystemFont(ofSize: label.font.pointSize)
-        label.backgroundColor = UIColor.clear
-        label.numberOfLines = 1
+        label.backgroundColor = AppColors.primaryColor?.withAlphaComponent(0.7)
+        label.numberOfLines = 0
         label.sizeToFit()
         return label
     }()
@@ -46,17 +47,8 @@ class CustomCollectionViewCell : UICollectionViewCell{
         addSubview(imageView)
         addSubview(label)
         layer.borderWidth = 3.0
-        layer.borderColor = AppColors.primaryTintColor?.cgColor
+        layer.borderColor = AppColors.secondaryPrimaryColor?.cgColor
         layer.cornerRadius = 15.0
-        let backgroundImage = AppImages.appIconImage
-        let context = CIContext(options: nil)
-        let ciImage = CIImage(image: backgroundImage!)
-        let filter = CIFilter(name: "CIGaussianBlur")
-        filter?.setValue(ciImage, forKey: kCIInputImageKey)
-        filter?.setValue(5.0, forKey: kCIInputRadiusKey)
-        let result = filter?.value(forKey: kCIOutputImageKey) as! CIImage
-        let blurredImage = UIImage(cgImage: context.createCGImage(result, from: result.extent)!)
-        self.label.backgroundColor = UIColor(patternImage: blurredImage)
         
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: topAnchor),
@@ -65,9 +57,9 @@ class CustomCollectionViewCell : UICollectionViewCell{
             imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
  
             label.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
+            label.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -20),
             label.widthAnchor.constraint(equalToConstant: 100),
-            label.heightAnchor.constraint(equalToConstant: 30)
+            //label.heightAnchor.constraint(equalToConstant: 30)
         ])
         
     }
