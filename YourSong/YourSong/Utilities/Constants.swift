@@ -8,6 +8,8 @@
 import Foundation
 
 enum Constants{
-    static let urlForMusics = "https://api.deezer.com/genre"
+    static let baseUrl = "https://api.deezer.com"
+    static let endpointForMusics = "/genre"
+    static let endpointForArtists = "/artists"
     static let customCellID = "customCell"
 }

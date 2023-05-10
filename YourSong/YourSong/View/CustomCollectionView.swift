@@ -8,14 +8,14 @@
 import Foundation
 import UIKit
 
-class CustomCollectionView : UICollectionView{
-    private let itemsPerRow: CGFloat = 2
-    private let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-    private let model : CollectionModel!
+class CustomCollectionView: UICollectionView{
+    let itemsPerRow: CGFloat = 2
+    let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    var model : AnyObject
     
-    init(model : CollectionModel) {
+    init(model : AnyObject) {
         
-        self.model = model
+        self.model = model 
 
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -25,7 +25,6 @@ class CustomCollectionView : UICollectionView{
         delegate = self
         dataSource = self
         
-        register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
     
     required init?(coder: NSCoder) {
@@ -34,37 +33,4 @@ class CustomCollectionView : UICollectionView{
     
 }
 
-extension CustomCollectionView : UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-        let availableWidth = frame.width - paddingSpace
-        let widthPerItem = availableWidth / itemsPerRow
-        return CGSize(width: widthPerItem, height: widthPerItem)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return sectionInsets
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model.data.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: Constants.customCellID)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.customCellID, for: indexPath) as! CustomCollectionViewCell
-        
-       
-        cell.label.text = model.data[indexPath.row].name
-        if let url = URL(string: model.data[indexPath.row].picture){
-            if let imageData = try? Data(contentsOf: url) {
-                if let image = UIImage(data: imageData) {
-                    cell.imageView.image = image
-                }
-            }
-        }
-        
-        return cell
-    }
-}
+

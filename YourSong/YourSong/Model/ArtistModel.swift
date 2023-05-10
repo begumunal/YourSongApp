@@ -1,22 +1,24 @@
 //
-//  CollectionModel.swift
+//  ArtistModel.swift
 //  YourSong
 //
-//  Created by Begum Unal on 9.05.2023.
+//  Created by Begum Unal on 10.05.2023.
 //
 
 import Foundation
 
-struct CollectionModel: Codable {
-    let data: [Datum]
+class ArtistModel: Codable {
+    let data: [ArtistDatum]
 }
 
 // MARK: - Datum
-struct Datum: Codable {
+struct ArtistDatum: Codable {
     let id: Int
     let name: String
     let picture: String
     let pictureSmall, pictureMedium, pictureBig, pictureXl: String
+    let radio: Bool
+    let tracklist: String
     let type: String
 
     enum CodingKeys: String, CodingKey {
@@ -25,6 +27,6 @@ struct Datum: Codable {
         case pictureMedium = "picture_medium"
         case pictureBig = "picture_big"
         case pictureXl = "picture_xl"
-        case type
+        case radio, tracklist, type
     }
 }

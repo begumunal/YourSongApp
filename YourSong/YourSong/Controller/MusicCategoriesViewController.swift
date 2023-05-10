@@ -16,17 +16,20 @@ class MusicCategoriesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.setup()
+        
+        
     }
     
     private func setup(){
-        view.backgroundColor = AppColors.primaryColor
+        
         self.toolbar.tintColor = AppColors.primaryTintColor
         self.toolbar.barTintColor = AppColors.secondaryTintColor
+        self.toolbar.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = AppColors.primaryColor
         view.addSubview(toolbar)
-        toolbar.translatesAutoresizingMaskIntoConstraints = false
-        
+       
         /*titleLabel.text = "Başlık"
         titleLabel.textAlignment = .center
         let titleBarButton = UIBarButtonItem(customView: titleLabel)
@@ -40,28 +43,31 @@ class MusicCategoriesViewController: UIViewController {
         ])
         
         self.fetchMusics()
+        
     }
 
     
     private func fetchMusics(){
        
-        networkManager.fetchData(urlString: Constants.urlForMusics, decodingType: CollectionModel.self) { (result: Result<CollectionModel, Error>) in
+        networkManager.fetchData(urlString: Constants.baseUrl + Constants.endpointForMusics, decodingType: MusicModel.self) { (result: Result<MusicModel, Error>) in
             switch result {
             case .success(let model):
                 
                 DispatchQueue.main.async {
                     self.musicCategoriesCollection = CustomCollectionView(model: model)
+                    
                     self.musicCategoriesCollection.translatesAutoresizingMaskIntoConstraints = false
                     
                     self.view.addSubview(self.musicCategoriesCollection)
                    
                     NSLayoutConstraint.activate([
                         self.musicCategoriesCollection.topAnchor.constraint(equalTo: self.toolbar.bottomAnchor),
-    
+                        self.musicCategoriesCollection.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
                         self.musicCategoriesCollection.widthAnchor.constraint(equalToConstant: self.view.frame.width),
                         self.musicCategoriesCollection.heightAnchor.constraint(equalToConstant: self.view.frame.height)
                     ])
                 }
+                
             case .failure(let error):
                 print(error.localizedDescription)
             }

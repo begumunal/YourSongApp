@@ -33,7 +33,8 @@ class SplashViewController: UIViewController {
             self.tabBar.modalPresentationStyle = .fullScreen
             self.tabBar.tabBar.backgroundColor = AppColors.secondaryPrimaryColor
             self.tabBar.tabBar.tintColor = AppColors.secondaryTintColor
-            self.present(self.tabBar, animated: true, completion: nil)
+            
+            self.navigationController?.setViewControllers([self.tabBar], animated: true)
         }
     }
     private func setup(){

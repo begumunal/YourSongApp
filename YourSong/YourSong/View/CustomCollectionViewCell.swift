@@ -40,7 +40,7 @@ class CustomCollectionViewCell : UICollectionViewCell{
     }
     
     private func setup() {
-        // ImageView Constraints
+       
         label.translatesAutoresizingMaskIntoConstraints = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -59,7 +59,6 @@ class CustomCollectionViewCell : UICollectionViewCell{
             label.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
             label.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -20),
             label.widthAnchor.constraint(equalToConstant: 100),
-            //label.heightAnchor.constraint(equalToConstant: 30)
         ])
         
     }
