@@ -9,6 +9,7 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
 
+    private let toolbar = CustomToolbar()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -16,7 +17,17 @@ class FavoritesViewController: UIViewController {
     }
     
     private func setup(){
+        self.toolbar.setTitle(title: Constants.FavoritesViewControllerTitle)
+        self.toolbar.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = AppColors.primaryColor
+        view.addSubview(toolbar)
+        
+        NSLayoutConstraint.activate([
+            toolbar.topAnchor.constraint(equalTo: view.topAnchor),
+            toolbar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            toolbar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            toolbar.heightAnchor.constraint(equalToConstant: 90)
+        ])
     }
     
 

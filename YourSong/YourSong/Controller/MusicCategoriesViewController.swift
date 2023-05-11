@@ -8,8 +8,7 @@
 import UIKit
 
 class MusicCategoriesViewController: UIViewController {
-    private let toolbar = UIToolbar()
-    //private let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 20))
+    private let toolbar = CustomToolbar()
 
     private let networkManager = NetworkManager()
     private var musicCategoriesCollection : CustomCollectionView!
@@ -23,23 +22,17 @@ class MusicCategoriesViewController: UIViewController {
     }
     
     private func setup(){
-        
-        self.toolbar.tintColor = AppColors.primaryTintColor
-        self.toolbar.barTintColor = AppColors.secondaryTintColor
+       
+        self.toolbar.setTitle(title: Constants.MusicCategoriesViewControllerTitle)
         self.toolbar.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = AppColors.primaryColor
         view.addSubview(toolbar)
        
-        /*titleLabel.text = "Başlık"
-        titleLabel.textAlignment = .center
-        let titleBarButton = UIBarButtonItem(customView: titleLabel)
-        let flexibleSpaceBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        toolbar.setItems([flexibleSpaceBarButton, titleBarButton, flexibleSpaceBarButton], animated: false)*/
         NSLayoutConstraint.activate([
             toolbar.topAnchor.constraint(equalTo: view.topAnchor),
             toolbar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             toolbar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            toolbar.heightAnchor.constraint(equalToConstant: 80)
+            toolbar.heightAnchor.constraint(equalToConstant: 90)
         ])
         
         self.fetchMusics()

@@ -11,7 +11,6 @@ class MusicModel: Codable {
     let data: [Datum]
 }
 
-// MARK: - Datum
 struct Datum: Codable {
     let id: Int
     let name: String

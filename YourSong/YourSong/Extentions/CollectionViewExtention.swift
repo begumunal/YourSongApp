@@ -35,8 +35,8 @@ extension CustomCollectionView : UICollectionViewDelegateFlowLayout, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: Constants.customCellID)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.customCellID, for: indexPath) as! CustomCollectionViewCell
+        collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: Constants.customCollectionCellID)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.customCollectionCellID, for: indexPath) as! CustomCollectionViewCell
         
         if let model = model as? MusicModel{
             cell.label.text = model.data[indexPath.row].name
@@ -74,20 +74,22 @@ extension CustomCollectionView : UICollectionViewDelegate{
             }
             let nextVC = ArtistCategoriesViewController()
             nextVC.selectedCellID = selectedCellID
+            nextVC.toolBarTitle = model.data[indexPath.row].name
             guard let navController = musicCategoriesVC.navigationController else { return }
             navController.navigationItem.backButtonTitle = ""
             navController.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-            navController.pushViewController(nextVC, animated: true)
+            navController.setViewControllers([nextVC], animated: true)
+            
 
         }
         if let model = model as? ArtistModel{
             let selectedCellID = model.data[indexPath.row].id
-            guard let musicCategoriesVC = self.traverseResponderChain(for: MusicCategoriesViewController.self) else {
+            guard let artistCategoriesVC = self.traverseResponderChain(for: ArtistCategoriesViewController.self) else {
                 return
             }
-            let nextVC = ArtistCategoriesViewController()
-            nextVC.selectedCellID = selectedCellID
-            guard let navController = musicCategoriesVC.navigationController else { return }
+            let nextVC = ArtistDetailViewController()
+            nextVC.selectedIndexId = selectedCellID
+            guard let navController = artistCategoriesVC.navigationController else { return }
             navController.pushViewController(nextVC, animated: true)
         }
     }

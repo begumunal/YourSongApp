@@ -8,6 +8,8 @@
 import UIKit
 
 class ArtistCategoriesViewController: UIViewController {
+    private let toolbar = CustomToolbar()
+    var toolBarTitle : String?
     var selectedCellID : Int?
     private let networkManager = NetworkManager()
     private var singerCategoriesCollection : CustomCollectionView!
@@ -19,10 +21,22 @@ class ArtistCategoriesViewController: UIViewController {
     }
     
     private func setup(){
+        self.toolbar.setTitle(title: toolBarTitle!)
+        self.toolbar.backButton.setImage(UIImage(systemName: Constants.backButtonSystemName), for: .normal)
+        toolbar.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        self.toolbar.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = AppColors.primaryColor
-        self.fetchSinger()
+        view.addSubview(toolbar)
+        
+        NSLayoutConstraint.activate([
+            toolbar.topAnchor.constraint(equalTo: view.topAnchor),
+            toolbar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            toolbar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            toolbar.heightAnchor.constraint(equalToConstant: 90)
+        ])
+        self.fetchArtists()
     }
-    private func fetchSinger(){
+    private func fetchArtists(){
        
         guard let id = selectedCellID else{ return }
         networkManager.fetchData(urlString: Constants.baseUrl + Constants.endpointForMusics + "/\(id)" + Constants.endpointForArtists, decodingType: ArtistModel.self) { (result: Result<ArtistModel, Error>) in
@@ -37,7 +51,7 @@ class ArtistCategoriesViewController: UIViewController {
                    
                     NSLayoutConstraint.activate([
                         self.singerCategoriesCollection.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-    
+                        self.singerCategoriesCollection.topAnchor.constraint(equalTo: self.toolbar.bottomAnchor),
                         self.singerCategoriesCollection.widthAnchor.constraint(equalToConstant: self.view.frame.width),
                         self.singerCategoriesCollection.heightAnchor.constraint(equalToConstant: self.view.frame.height)
                     ])
@@ -47,5 +61,12 @@ class ArtistCategoriesViewController: UIViewController {
             }
         }
         
+    }
+    
+    @objc func backButtonTapped() {
+        guard let controller = UIApplication.shared.keyWindow?.rootViewController else {
+            return
+        }
+        controller.dismiss(animated: true, completion: nil)
     }
 }

@@ -15,7 +15,7 @@ class CustomCollectionView: UICollectionView{
     
     init(model : AnyObject) {
         
-        self.model = model 
+        self.model = model
 
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical

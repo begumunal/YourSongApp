@@ -27,6 +27,13 @@
 		33DF024D2A0B8EAB00D2FB6A /* CollectionViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF024C2A0B8EAB00D2FB6A /* CollectionViewExtention.swift */; };
 		33DF024F2A0BC24500D2FB6A /* ArtistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF024E2A0BC24500D2FB6A /* ArtistModel.swift */; };
 		33DF02512A0BDE0A00D2FB6A /* ArtistDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF02502A0BDE0A00D2FB6A /* ArtistDetailViewController.swift */; };
+		33DF02532A0BF2AC00D2FB6A /* CustomTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF02522A0BF2AC00D2FB6A /* CustomTableView.swift */; };
+		33DF02552A0BF3A600D2FB6A /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF02542A0BF3A600D2FB6A /* CustomTableViewCell.swift */; };
+		33DF02572A0BF4F700D2FB6A /* TableViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF02562A0BF4F700D2FB6A /* TableViewExtention.swift */; };
+		33DF02592A0C023B00D2FB6A /* AlbumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF02582A0C023B00D2FB6A /* AlbumModel.swift */; };
+		33DF025B2A0C12A800D2FB6A /* CustomTableViewCellDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF025A2A0C12A800D2FB6A /* CustomTableViewCellDetail.swift */; };
+		33DF025D2A0C133500D2FB6A /* CustomTableViewFirstCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF025C2A0C133500D2FB6A /* CustomTableViewFirstCell.swift */; };
+		33DF025F2A0CF0C800D2FB6A /* CustomToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF025E2A0CF0C800D2FB6A /* CustomToolBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +59,13 @@
 		33DF024C2A0B8EAB00D2FB6A /* CollectionViewExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewExtention.swift; sourceTree = "<group>"; };
 		33DF024E2A0BC24500D2FB6A /* ArtistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistModel.swift; sourceTree = "<group>"; };
 		33DF02502A0BDE0A00D2FB6A /* ArtistDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDetailViewController.swift; sourceTree = "<group>"; };
+		33DF02522A0BF2AC00D2FB6A /* CustomTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableView.swift; sourceTree = "<group>"; };
+		33DF02542A0BF3A600D2FB6A /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		33DF02562A0BF4F700D2FB6A /* TableViewExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewExtention.swift; sourceTree = "<group>"; };
+		33DF02582A0C023B00D2FB6A /* AlbumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumModel.swift; sourceTree = "<group>"; };
+		33DF025A2A0C12A800D2FB6A /* CustomTableViewCellDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCellDetail.swift; sourceTree = "<group>"; };
+		33DF025C2A0C133500D2FB6A /* CustomTableViewFirstCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewFirstCell.swift; sourceTree = "<group>"; };
+		33DF025E2A0CF0C800D2FB6A /* CustomToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToolBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,9 +139,14 @@
 		33DF02322A0A29A400D2FB6A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				33DF025E2A0CF0C800D2FB6A /* CustomToolBar.swift */,
 				33DF02352A0A2C6300D2FB6A /* CustomImageView.swift */,
 				33DF023B2A0A3F1F00D2FB6A /* CustomCollectionView.swift */,
 				33DF023D2A0A415C00D2FB6A /* CustomCollectionViewCell.swift */,
+				33DF02522A0BF2AC00D2FB6A /* CustomTableView.swift */,
+				33DF02542A0BF3A600D2FB6A /* CustomTableViewCell.swift */,
+				33DF025A2A0C12A800D2FB6A /* CustomTableViewCellDetail.swift */,
+				33DF025C2A0C133500D2FB6A /* CustomTableViewFirstCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -145,6 +164,7 @@
 			children = (
 				33DF02452A0A7F0200D2FB6A /* MusicModel.swift */,
 				33DF024E2A0BC24500D2FB6A /* ArtistModel.swift */,
+				33DF02582A0C023B00D2FB6A /* AlbumModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -153,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				33DF024C2A0B8EAB00D2FB6A /* CollectionViewExtention.swift */,
+				33DF02562A0BF4F700D2FB6A /* TableViewExtention.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -228,11 +249,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				33DF021C2A092D9200D2FB6A /* SplashViewController.swift in Sources */,
+				33DF025F2A0CF0C800D2FB6A /* CustomToolBar.swift in Sources */,
+				33DF02532A0BF2AC00D2FB6A /* CustomTableView.swift in Sources */,
 				33DF023A2A0A2FC100D2FB6A /* FavoritesViewController.swift in Sources */,
 				33DF02342A0A2B9800D2FB6A /* AppImages.swift in Sources */,
 				33DF024F2A0BC24500D2FB6A /* ArtistModel.swift in Sources */,
+				33DF02572A0BF4F700D2FB6A /* TableViewExtention.swift in Sources */,
 				33DF02462A0A7F0200D2FB6A /* MusicModel.swift in Sources */,
+				33DF02552A0BF3A600D2FB6A /* CustomTableViewCell.swift in Sources */,
 				33DF02432A0A751400D2FB6A /* NetworkManager.swift in Sources */,
+				33DF025B2A0C12A800D2FB6A /* CustomTableViewCellDetail.swift in Sources */,
 				33DF02182A092D9200D2FB6A /* AppDelegate.swift in Sources */,
 				33DF02362A0A2C6300D2FB6A /* CustomImageView.swift in Sources */,
 				33DF023C2A0A3F1F00D2FB6A /* CustomCollectionView.swift in Sources */,
@@ -243,8 +269,10 @@
 				33DF02302A093E8A00D2FB6A /* AppColors.swift in Sources */,
 				33DF02222A092D9200D2FB6A /* YourSong.xcdatamodeld in Sources */,
 				33DF024D2A0B8EAB00D2FB6A /* CollectionViewExtention.swift in Sources */,
+				33DF02592A0C023B00D2FB6A /* AlbumModel.swift in Sources */,
 				33DF023E2A0A415C00D2FB6A /* CustomCollectionViewCell.swift in Sources */,
 				33DF02402A0A5F5D00D2FB6A /* Constants.swift in Sources */,
+				33DF025D2A0C133500D2FB6A /* CustomTableViewFirstCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
