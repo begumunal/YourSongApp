@@ -12,6 +12,7 @@ enum Constants{
     static let endpointForMusics = "/genre"
     static let endpointForArtists = "/artists"
     static let endpointForArtistDetail = "/artist"
+    static let endpointForAlbumDetail = "/album"
     static let customCollectionCellID = "customCollectionCell"
     static let customTableCellID = "customTableCell"
     static let customTableFirstCellID = "customTableFirstCell"

@@ -7,8 +7,11 @@
 
 import UIKit
 
-class ArtistDetailViewController: UIViewController {
+class AlbumListViewController: UIViewController {
     var selectedIndexId : Int?
+    var toolBarTitle : String?
+    var artistMainImage : UIImage?
+    private let toolBar = CustomToolbar()
     private var artistDetail : CustomTableView!
     private let networkManager = NetworkManager()
     override func viewDidLoad() {
@@ -18,12 +21,25 @@ class ArtistDetailViewController: UIViewController {
     }
     
     private func setup(){
-        self.view.backgroundColor = AppColors.primaryColor
+        self.toolBar.setTitle(title: toolBarTitle!)
+        self.toolBar.backButton.setImage(UIImage(systemName: Constants.backButtonSystemName), for: .normal)
+        //toolBar.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        self.toolBar.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = AppColors.primaryColor
+        view.addSubview(toolBar)
+        
+        NSLayoutConstraint.activate([
+            toolBar.topAnchor.constraint(equalTo: view.topAnchor),
+            toolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            toolBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            toolBar.heightAnchor.constraint(equalToConstant: 90)
+        ])
+
         fetchArtistDetail()
     }
     private func fetchArtistDetail(){
         guard let id = selectedIndexId else{ return }
-        networkManager.fetchData(urlString: Constants.baseUrl + Constants.endpointForArtistDetail + "/\(id)", decodingType: AlbumDatum.self) { (result: Result<AlbumDatum, Error>) in
+        networkManager.fetchData(urlString: Constants.baseUrl + Constants.endpointForArtistDetail + "/\(id)/albums", decodingType: AlbumModel.self) { (result: Result<AlbumModel, Error>) in
             switch result {
             case .success(let model):
                 
@@ -35,7 +51,7 @@ class ArtistDetailViewController: UIViewController {
                     self.view.addSubview(self.artistDetail)
                    
                     NSLayoutConstraint.activate([
-                        self.artistDetail.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+                        self.artistDetail.topAnchor.constraint(equalTo: self.toolBar.bottomAnchor),
                         self.artistDetail.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
                         self.artistDetail.widthAnchor.constraint(equalToConstant: self.view.frame.width),
                         self.artistDetail.heightAnchor.constraint(equalToConstant: self.view.frame.height)

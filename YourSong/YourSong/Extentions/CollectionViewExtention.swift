@@ -44,16 +44,18 @@ extension CustomCollectionView : UICollectionViewDelegateFlowLayout, UICollectio
                 if let imageData = try? Data(contentsOf: url) {
                     if let image = UIImage(data: imageData) {
                         cell.imageView.image = image
+                        
                     }
                 }
             }
         }
         if let model = model as? ArtistModel{
             cell.label.text = model.data[indexPath.row].name
-            if let url = URL(string: model.data[indexPath.row].picture){
+            if let url = URL(string: model.data[indexPath.row].pictureMedium){
                 if let imageData = try? Data(contentsOf: url) {
                     if let image = UIImage(data: imageData) {
                         cell.imageView.image = image
+                        
                     }
                 }
             }
@@ -87,10 +89,19 @@ extension CustomCollectionView : UICollectionViewDelegate{
             guard let artistCategoriesVC = self.traverseResponderChain(for: ArtistCategoriesViewController.self) else {
                 return
             }
-            let nextVC = ArtistDetailViewController()
+            let nextVC = AlbumListViewController()
             nextVC.selectedIndexId = selectedCellID
+            nextVC.toolBarTitle = model.data[indexPath.row].name
+            if let url = URL(string: model.data[indexPath.row].pictureMedium){
+                if let imageData = try? Data(contentsOf: url) {
+                    if let image = UIImage(data: imageData) {
+                        nextVC.artistMainImage = image
+                        
+                    }
+                }
+            }
             guard let navController = artistCategoriesVC.navigationController else { return }
-            navController.pushViewController(nextVC, animated: true)
+            navController.setViewControllers([nextVC], animated: true)
         }
     }
     

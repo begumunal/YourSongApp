@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 
 class CustomTableView: UITableView {
-    var model : Any?
+    var model : AnyObject?
     
-    init(frame: CGRect, style: UITableView.Style, model: Any) {
+    init(frame: CGRect, style: UITableView.Style, model: AnyObject) {
         self.model = model 
         super.init(frame: frame, style: style)
         register(CustomTableViewCell.self, forCellReuseIdentifier: Constants.customTableCellID)
