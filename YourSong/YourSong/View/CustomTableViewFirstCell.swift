@@ -22,11 +22,10 @@ class CustomTableViewFirstCell: UITableViewCell {
     }
     
     func setupViews() {
-        // Custom görünümü ekleyin
+
         self.artistMainImage.translatesAutoresizingMaskIntoConstraints = false
         addSubview(artistMainImage)
-        
-        // Görünüm için constraint'leri belirleyin
+
         NSLayoutConstraint.activate([
             artistMainImage.leadingAnchor.constraint(equalTo: leadingAnchor),
             artistMainImage.topAnchor.constraint(equalTo: topAnchor),

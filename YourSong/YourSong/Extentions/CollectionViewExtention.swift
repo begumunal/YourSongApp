@@ -78,9 +78,7 @@ extension CustomCollectionView : UICollectionViewDelegate{
             nextVC.selectedCellID = selectedCellID
             nextVC.toolBarTitle = model.data[indexPath.row].name
             guard let navController = musicCategoriesVC.navigationController else { return }
-            navController.navigationItem.backButtonTitle = ""
-            navController.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-            navController.setViewControllers([nextVC], animated: true)
+            navController.pushViewController(nextVC, animated: true)
             
 
         }
@@ -95,13 +93,13 @@ extension CustomCollectionView : UICollectionViewDelegate{
             if let url = URL(string: model.data[indexPath.row].pictureMedium){
                 if let imageData = try? Data(contentsOf: url) {
                     if let image = UIImage(data: imageData) {
-                        nextVC.artistMainImage = image
+                        //let image =
                         
                     }
                 }
             }
             guard let navController = artistCategoriesVC.navigationController else { return }
-            navController.setViewControllers([nextVC], animated: true)
+            navController.pushViewController(nextVC, animated: true)
         }
     }
     

@@ -9,12 +9,12 @@ import Foundation
 import UIKit
 
 class CustomTableViewCellDetail: UIView {
-    
+    let playingIconImageView = UIImageView(image: UIImage(systemName: "speaker.wave.3"))
     let imageView = UIImageView()
     let nameLabel = UILabel()
     let infoLabel = UILabel()
-    let likeButton = UIButton(type: .system)
-    
+    let likeButton = UIButton()
+   
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -42,30 +42,43 @@ class CustomTableViewCellDetail: UIView {
         infoLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(infoLabel)
         
+        playingIconImageView.contentMode = .scaleAspectFit
+        playingIconImageView.translatesAutoresizingMaskIntoConstraints = false
+        playingIconImageView.isHidden = true
+        playingIconImageView.tintColor = AppColors.secondaryPrimaryColor
+        addSubview(playingIconImageView)
+        
+        likeButton.tintColor = AppColors.primaryTintColor
         likeButton.translatesAutoresizingMaskIntoConstraints = false
+        likeButton.isUserInteractionEnabled = true
         addSubview(likeButton)
         
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            imageView.topAnchor.constraint(equalTo: topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            imageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             imageView.widthAnchor.constraint(equalToConstant: 40),
             imageView.heightAnchor.constraint(equalToConstant: 40),
             
             nameLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 40),
-            nameLabel.topAnchor.constraint(equalTo: topAnchor),
-            nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            nameLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            nameLabel.trailingAnchor.constraint(equalTo: playingIconImageView.trailingAnchor),
             
+           
             infoLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 40),
             infoLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
             infoLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            infoLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            playingIconImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            playingIconImageView.trailingAnchor.constraint(equalTo: self.likeButton.trailingAnchor, constant: -40),
+            playingIconImageView.widthAnchor.constraint(equalToConstant: 32),
+            playingIconImageView.heightAnchor.constraint(equalToConstant: 32),
             
             likeButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             likeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             likeButton.widthAnchor.constraint(equalToConstant: 32),
-            likeButton.heightAnchor.constraint(equalToConstant: 32)
+            likeButton.heightAnchor.constraint(equalToConstant: 32),
+            
+            
         ])
     }
 }

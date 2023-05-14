@@ -10,7 +10,6 @@ import UIKit
 
 
 class CustomToolbar: UIToolbar {
-    var backButton = UIButton()
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -31,28 +30,18 @@ class CustomToolbar: UIToolbar {
     }
     
     private func setup() {
-        // Background color
+
         self.barTintColor = AppColors.secondaryTintColor
-        
-        backButton.tintColor = AppColors.secondaryPrimaryColor
-        backButton.isUserInteractionEnabled = true 
         self.addSubview(titleLabel)
-        self.addSubview(backButton)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        backButton.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.numberOfLines = 0
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
             titleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
-        
-            backButton.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            backButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
-            backButton.widthAnchor.constraint(equalToConstant: 40),
-            backButton.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
-    
-    // Set title text
+
     func setTitle(title: String) {
         titleLabel.text = title
     }

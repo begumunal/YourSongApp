@@ -7,14 +7,16 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class CoreDataManager {
 
     let entityName = "LikedItem"
     let persistentContainer: NSPersistentContainer
+  //  let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     init() {
-        persistentContainer = NSPersistentContainer(name: entityName)
+        persistentContainer = NSPersistentContainer(name: "YourSong")
         persistentContainer.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")

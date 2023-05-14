@@ -10,7 +10,7 @@ import UIKit
 class AlbumListViewController: UIViewController {
     var selectedIndexId : Int?
     var toolBarTitle : String?
-    var artistMainImage : UIImage?
+    
     private let toolBar = CustomToolbar()
     private var artistDetail : CustomTableView!
     private let networkManager = NetworkManager()
@@ -21,9 +21,8 @@ class AlbumListViewController: UIViewController {
     }
     
     private func setup(){
+        navigationController?.navigationBar.tintColor = AppColors.secondaryPrimaryColor
         self.toolBar.setTitle(title: toolBarTitle!)
-        self.toolBar.backButton.setImage(UIImage(systemName: Constants.backButtonSystemName), for: .normal)
-        //toolBar.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         self.toolBar.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = AppColors.primaryColor
         view.addSubview(toolBar)

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 enum TableModel{
     case AlbumModel
@@ -34,25 +35,18 @@ extension CustomTableView : UITableViewDelegate, UITableViewDataSource{
                 _ = CustomTableViewFirstCell(style: .default, reuseIdentifier: Constants.customTableFirstCellID)
                 let cell = tableView.dequeueReusableCell(withIdentifier: Constants.customTableFirstCellID, for: indexPath) as! CustomTableViewFirstCell
                 cell.isUserInteractionEnabled = false
-                
+                //cell.artistMainImage = 
                 return cell
             }else{
                 _ = CustomTableViewCell(style: .default, reuseIdentifier: Constants.customTableCellID)
                 let cell = tableView.dequeueReusableCell(withIdentifier: Constants.customTableCellID, for: indexPath) as! CustomTableViewCell
                 cell.isUserInteractionEnabled = true
-                cell.customView.nameLabel.text = model.data[indexPath.row].title
-                cell.customView.infoLabel.text = model.data[indexPath.row].releaseDate
-                if checkDatabase(id: model.data[indexPath.row].id){
-                    cell.customView.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-                }else{
-                    cell.customView.likeButton.setImage(UIImage(systemName: "suit.heart.fill"), for: .normal)
-                }
-                if let url = URL(string: model.data[indexPath.row].coverSmall){
+                cell.customView.nameLabel.text = model.data[indexPath.row-1].title
+                cell.customView.infoLabel.text = model.data[indexPath.row-1].releaseDate
+                
+                if let url = URL(string: model.data[indexPath.row-1].coverSmall){
                     loadImage(from: url) { image in
-                        DispatchQueue.main.async {
-                            cell.imageView!.image = image
-                        }
-                       
+                        cell.imageView?.image = image
                     }
                 }
                 return cell
@@ -60,15 +54,19 @@ extension CustomTableView : UITableViewDelegate, UITableViewDataSource{
         }else if let model = model as? SongModel{
             _ = CustomTableViewCell(style: .default, reuseIdentifier: Constants.customTableCellID)
             let cell = tableView.dequeueReusableCell(withIdentifier: Constants.customTableCellID, for: indexPath) as! CustomTableViewCell
+            //cell.customView.likeButton.addTarget(self, action: #selector(likeButtonTapped(_:model:)), for: .touchUpInside)
             cell.isUserInteractionEnabled = true
             cell.customView.nameLabel.text = model.data[indexPath.row].title
-            if let url = URL(string: " https://e-cdns-images.dzcdn.net/images/cover/\(model.data[indexPath.row].md5Image)/56x56-000000-80-0-0.jpg"){
+            cell.customView.likeButton.tag = indexPath.row
+            cell.customView.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            cell.customView.infoLabel.text = formatDuration(seconds: (model.data[indexPath.row].duration))
+            let md5image = model.data[indexPath.row].md5Image
+            if let url = URL(string: "https://e-cdns-images.dzcdn.net/images/cover/\(md5image)/56x56-000000-80-0-0.jpg") {
                 loadImage(from: url) { image in
-                    DispatchQueue.main.async {
-                        cell.imageView!.image = image
-                    }
+                    cell.imageView?.image = image
                 }
             }
+          
             return cell
         }
         else{
@@ -86,59 +84,69 @@ extension CustomTableView : UITableViewDelegate, UITableViewDataSource{
                 return
             }
             let nextVC = SongListViewController()
-            nextVC.toolBarTitle = model.data[indexPath.row].title
-            nextVC.selectedIndexId = model.data[indexPath.row].id
+            nextVC.toolBarTitle = model.data[indexPath.row-1].title
+            nextVC.selectedIndexId = model.data[indexPath.row-1].id
             guard let navController = albumListVC.navigationController else { return }
-            navController.setViewControllers([nextVC], animated: true)
+            navController.pushViewController(nextVC, animated: true)
            
         }else if let model = model as? SongModel{
             //TIKLANAN ŞARKININ KISA BİR DİNLEMESİ OLACAK
+            let datum = model.data[indexPath.row]
+            
+            guard let previewURL = URL(string: datum.preview) else { return }
+            let playerItem = AVPlayerItem(url: previewURL)
+            
+            let cell = tableView.cellForRow(at: indexPath) as? CustomTableViewCell
+            cell?.player = AVPlayer(playerItem: playerItem)
+            cell?.showPlayingIcon()
+
+            cell?.player?.play()
+            NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: playerItem, queue: nil) { [weak self] notification in
+                cell?.hidePlayingIcon()
+            }
+            cell?.likeButtonTappedClosure = { cell in
+                   // Button tıklandığında yapılacak işlemler
+            }
+            
         }
-        
-        
-      
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if let model = model as? AlbumModel{
+        if model is AlbumModel{
             if indexPath.row == 0{
                 return 200
             }else{
-                return 76 // hücre yüksekliği
+                return 85 // hücre yüksekliği
             }
         }else{
-            return 76
-        }
-        
-        
+            return 85
+        }   
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10 // hücreler arasındaki boşluk yüksekliği
-    }
-    
+    //görüntüler çok geç yüklendiği için buna çözüm olarak imageleri önbelleğe almayı gerçekleştirdiğim fonk.
     func loadImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
+        if let cachedImage = imageCache[url.absoluteString] {
+            completion(cachedImage)
+            return
+        }
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else {
                 completion(nil)
                 return
             }
+            let image = UIImage(data: data)
+            self.imageCache[url.absoluteString] = image
+            
             DispatchQueue.main.async {
-                completion(UIImage(data: data))
+                completion(image)
             }
         }.resume()
     }
-    
-    func checkDatabase(id: Int) -> Bool{
-        let coreDataManager = CoreDataManager()
-        if coreDataManager.fetchData(withId: id, deviceID: UIDevice.current.identifierForVendor!.uuidString) != nil {
-            // Veri daha önce kaydedilmiş, silme işlemi yapılacak
-            coreDataManager.deleteData(withId: id, deviceID: UIDevice.current.identifierForVendor!.uuidString)
-            return true
-        } else {
-            // Veri daha önce kaydedilmemiş, kaydetme işlemi yapılacak
-            coreDataManager.saveData(withId: id, deviceID: UIDevice.current.identifierForVendor!.uuidString, isLiked: true)
-            return false
-        }
 
+    func formatDuration(seconds: Int) -> String {
+        let hours = seconds / 3600
+        let minutes = (seconds % 3600) / 60
+        let remainingSeconds = (seconds % 3600) % 60
+        
+        return String(format: "%02d:%02d:%02d", hours, minutes, remainingSeconds)
     }
 }

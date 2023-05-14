@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3370E8282A10E76C00C6B032 /* ImageStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370E8272A10E76C00C6B032 /* ImageStorable.swift */; };
 		33DF02182A092D9200D2FB6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF02172A092D9200D2FB6A /* AppDelegate.swift */; };
 		33DF021A2A092D9200D2FB6A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF02192A092D9200D2FB6A /* SceneDelegate.swift */; };
 		33DF021C2A092D9200D2FB6A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF021B2A092D9200D2FB6A /* SplashViewController.swift */; };
@@ -39,9 +40,12 @@
 		33F962EE2A0F609400A29CAE /* SongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F962ED2A0F609400A29CAE /* SongModel.swift */; };
 		33F962F02A0F612D00A29CAE /* ContributorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F962EF2A0F612D00A29CAE /* ContributorModel.swift */; };
 		33F962F32A1009A900A29CAE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F962F22A1009A900A29CAE /* CoreDataManager.swift */; };
+		33F962F62A10273400A29CAE /* LikedItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F962F42A10273400A29CAE /* LikedItem+CoreDataClass.swift */; };
+		33F962F72A10273400A29CAE /* LikedItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F962F52A10273400A29CAE /* LikedItem+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3370E8272A10E76C00C6B032 /* ImageStorable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorable.swift; sourceTree = "<group>"; };
 		33DF02142A092D9200D2FB6A /* YourSong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourSong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33DF02172A092D9200D2FB6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33DF02192A092D9200D2FB6A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +80,8 @@
 		33F962ED2A0F609400A29CAE /* SongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongModel.swift; sourceTree = "<group>"; };
 		33F962EF2A0F612D00A29CAE /* ContributorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributorModel.swift; sourceTree = "<group>"; };
 		33F962F22A1009A900A29CAE /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		33F962F42A10273400A29CAE /* LikedItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LikedItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		33F962F52A10273400A29CAE /* LikedItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LikedItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +95,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3370E8262A10E74F00C6B032 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				3370E8272A10E76C00C6B032 /* ImageStorable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		33DF020B2A092D9200D2FB6A = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +122,7 @@
 		33DF02162A092D9200D2FB6A /* YourSong */ = {
 			isa = PBXGroup;
 			children = (
+				3370E8262A10E74F00C6B032 /* Protocols */,
 				33F962F12A10099200A29CAE /* Database */,
 				33DF024B2A0B8E8500D2FB6A /* Extentions */,
 				33DF02412A0A74FC00D2FB6A /* Network */,
@@ -120,7 +135,6 @@
 				33DF02232A092D9400D2FB6A /* Assets.xcassets */,
 				33DF02252A092D9400D2FB6A /* LaunchScreen.storyboard */,
 				33DF02282A092D9400D2FB6A /* Info.plist */,
-				33DF02202A092D9200D2FB6A /* YourSong.xcdatamodeld */,
 			);
 			path = YourSong;
 			sourceTree = "<group>";
@@ -196,6 +210,9 @@
 		33F962F12A10099200A29CAE /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				33F962F42A10273400A29CAE /* LikedItem+CoreDataClass.swift */,
+				33F962F52A10273400A29CAE /* LikedItem+CoreDataProperties.swift */,
+				33DF02202A092D9200D2FB6A /* YourSong.xcdatamodeld */,
 				33F962F22A1009A900A29CAE /* CoreDataManager.swift */,
 			);
 			path = Database;
@@ -275,6 +292,7 @@
 				33DF025F2A0CF0C800D2FB6A /* CustomToolBar.swift in Sources */,
 				33DF02532A0BF2AC00D2FB6A /* CustomTableView.swift in Sources */,
 				33DF023A2A0A2FC100D2FB6A /* FavoritesViewController.swift in Sources */,
+				33F962F62A10273400A29CAE /* LikedItem+CoreDataClass.swift in Sources */,
 				33DF02342A0A2B9800D2FB6A /* AppImages.swift in Sources */,
 				33DF024F2A0BC24500D2FB6A /* ArtistModel.swift in Sources */,
 				33DF02572A0BF4F700D2FB6A /* TableViewExtention.swift in Sources */,
@@ -286,8 +304,10 @@
 				33DF02182A092D9200D2FB6A /* AppDelegate.swift in Sources */,
 				33DF02362A0A2C6300D2FB6A /* CustomImageView.swift in Sources */,
 				33F962EC2A0E323500A29CAE /* NetworkService.swift in Sources */,
+				33F962F72A10273400A29CAE /* LikedItem+CoreDataProperties.swift in Sources */,
 				33DF023C2A0A3F1F00D2FB6A /* CustomCollectionView.swift in Sources */,
 				33DF02382A0A2DA800D2FB6A /* MusicCategoriesViewController.swift in Sources */,
+				3370E8282A10E76C00C6B032 /* ImageStorable.swift in Sources */,
 				33DF02512A0BDE0A00D2FB6A /* AlbumListViewController.swift in Sources */,
 				33F962F32A1009A900A29CAE /* CoreDataManager.swift in Sources */,
 				33DF024A2A0ACA2A00D2FB6A /* ArtistCategoriesViewController.swift in Sources */,

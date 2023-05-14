@@ -21,9 +21,8 @@ class ArtistCategoriesViewController: UIViewController {
     }
     
     private func setup(){
+        navigationController?.navigationBar.tintColor = AppColors.secondaryPrimaryColor
         self.toolbar.setTitle(title: toolBarTitle!)
-        self.toolbar.backButton.setImage(UIImage(systemName: Constants.backButtonSystemName), for: .normal)
-        toolbar.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         self.toolbar.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = AppColors.primaryColor
         view.addSubview(toolbar)
@@ -51,7 +50,7 @@ class ArtistCategoriesViewController: UIViewController {
                    
                     NSLayoutConstraint.activate([
                         self.singerCategoriesCollection.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-                        self.singerCategoriesCollection.topAnchor.constraint(equalTo: self.toolbar.bottomAnchor),
+                        self.singerCategoriesCollection.topAnchor.constraint(equalTo: (self.toolbar.bottomAnchor)),
                         self.singerCategoriesCollection.widthAnchor.constraint(equalToConstant: self.view.frame.width),
                         self.singerCategoriesCollection.heightAnchor.constraint(equalToConstant: self.view.frame.height)
                     ])
@@ -63,10 +62,5 @@ class ArtistCategoriesViewController: UIViewController {
         
     }
     
-    @objc func backButtonTapped() {
-        guard let controller = UIApplication.shared.keyWindow?.rootViewController else {
-            return
-        }
-        controller.dismiss(animated: true, completion: nil)
-    }
+   
 }

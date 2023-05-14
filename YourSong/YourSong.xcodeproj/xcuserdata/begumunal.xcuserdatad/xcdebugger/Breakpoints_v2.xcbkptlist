@@ -7,17 +7,129 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5FBCCE2F-D0AB-4C3C-8E89-AFD0935EF706"
+            uuid = "A709EDAD-9C4E-433D-A922-91EF2C21D48E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "YourSong/Controller/ArtistCategoriesViewController.swift"
+            filePath = "YourSong/Controller/SongListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "backButtonTapped()"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "checkDatabase(id:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5299362E-9098-4DD2-94F1-5D8D38C8C4AF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YourSong/Controller/SongListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "likeButtonTapped(_:model:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "858E12D2-D3EE-470D-BF1F-545084F9A633"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YourSong/View/CustomTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "buttonTapped(sender:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "858E12D2-D3EE-470D-BF1F-545084F9A633 - 5987de1488a18598"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YourSong.CustomTableViewCell.buttonTapped(sender: __C.UIButton) -&gt; ()"
+                  moduleName = "YourSong"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/begumunal/Developer/xcode/YourSongApp/YourSong/YourSong/View/CustomTableViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "858E12D2-D3EE-470D-BF1F-545084F9A633 - 5987de1488a18598"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YourSong.CustomTableViewCell.buttonTapped(sender: __C.UIButton) -&gt; ()"
+                  moduleName = "YourSong"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/begumunal/Developer/xcode/YourSongApp/YourSong/YourSong/View/CustomTableViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "320">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0BF00CF1-FF4D-4C25-9658-4C978B569F62"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YourSong/Extentions/TableViewExtention.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "tableView(_:didSelectRowAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0BF00CF1-FF4D-4C25-9658-4C978B569F62 - d65f9913efc97a3c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YourSong.CustomTableView.tableView(_: __C.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "YourSong"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/begumunal/Developer/xcode/YourSongApp/YourSong/YourSong/Extentions/TableViewExtention.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "107"
+                  endingLineNumber = "107"
+                  offsetFromSymbolStart = "3348">
+               </Location>
+               <Location
+                  uuid = "0BF00CF1-FF4D-4C25-9658-4C978B569F62 - 85c7e70b06705d15"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (__C.UITableViewCell) -&gt; () in YourSong.CustomTableView.tableView(_: __C.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "YourSong"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/begumunal/Developer/xcode/YourSongApp/YourSong/YourSong/Extentions/TableViewExtention.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "109"
+                  endingLineNumber = "109"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

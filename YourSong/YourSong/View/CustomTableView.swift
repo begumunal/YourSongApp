@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 class CustomTableView: UITableView {
+    var imageCache = [String: UIImage]()
     var model : AnyObject?
-    
     init(frame: CGRect, style: UITableView.Style, model: AnyObject) {
         self.model = model 
         super.init(frame: frame, style: style)

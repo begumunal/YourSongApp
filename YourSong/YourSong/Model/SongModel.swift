@@ -6,7 +6,9 @@
 //
 
 import Foundation
-class SongModel: Codable {
+
+@objcMembers
+class SongModel: NSObject, Codable {
     let data: [SongDatum]
 }
 struct SongDatum: Codable {
