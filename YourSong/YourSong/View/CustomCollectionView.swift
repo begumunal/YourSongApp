@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 class CustomCollectionView: UICollectionView{
+   
+    var imageCache = [String: UIImage]()
     let itemsPerRow: CGFloat = 2
     let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     var model : AnyObject

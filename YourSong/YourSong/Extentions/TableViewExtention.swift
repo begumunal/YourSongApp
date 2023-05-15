@@ -35,7 +35,9 @@ extension CustomTableView : UITableViewDelegate, UITableViewDataSource{
                 _ = CustomTableViewFirstCell(style: .default, reuseIdentifier: Constants.customTableFirstCellID)
                 let cell = tableView.dequeueReusableCell(withIdentifier: Constants.customTableFirstCellID, for: indexPath) as! CustomTableViewFirstCell
                 cell.isUserInteractionEnabled = false
-                //cell.artistMainImage = 
+                let notificationCenter = NotificationCenter.default
+                notificationCenter.addObserver(self, selector: #selector(selectedImageDidChange(_:)), name: Notification.Name("SelectedImageDidChange"), object: nil)
+                cell.artistMainImage.image = self.mainImage
                 return cell
             }else{
                 _ = CustomTableViewCell(style: .default, reuseIdentifier: Constants.customTableCellID)
@@ -52,9 +54,9 @@ extension CustomTableView : UITableViewDelegate, UITableViewDataSource{
                 return cell
             }
         }else if let model = model as? SongModel{
+            
             _ = CustomTableViewCell(style: .default, reuseIdentifier: Constants.customTableCellID)
             let cell = tableView.dequeueReusableCell(withIdentifier: Constants.customTableCellID, for: indexPath) as! CustomTableViewCell
-            //cell.customView.likeButton.addTarget(self, action: #selector(likeButtonTapped(_:model:)), for: .touchUpInside)
             cell.isUserInteractionEnabled = true
             cell.customView.nameLabel.text = model.data[indexPath.row].title
             cell.customView.likeButton.tag = indexPath.row
@@ -67,6 +69,11 @@ extension CustomTableView : UITableViewDelegate, UITableViewDataSource{
                 }
             }
           
+            if coreDataManager.onlyCheckDatabase(id: model.data[indexPath.row].id){
+                cell.customView.likeButton.setImage(UIImage(systemName: "suit.heart.fill"), for: .normal)
+            }else{
+                cell.customView.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            }
             return cell
         }
         else{
@@ -90,26 +97,37 @@ extension CustomTableView : UITableViewDelegate, UITableViewDataSource{
             navController.pushViewController(nextVC, animated: true)
            
         }else if let model = model as? SongModel{
+            
             //TIKLANAN ŞARKININ KISA BİR DİNLEMESİ OLACAK
-            let datum = model.data[indexPath.row]
-            
-            guard let previewURL = URL(string: datum.preview) else { return }
-            let playerItem = AVPlayerItem(url: previewURL)
-            
+           
             let cell = tableView.cellForRow(at: indexPath) as? CustomTableViewCell
-            cell?.player = AVPlayer(playerItem: playerItem)
-            cell?.showPlayingIcon()
+            
+            
+            if cell?.touchedArea == .cell{
+                let datum = model.data[indexPath.row]
+                
+                guard let previewURL = URL(string: datum.preview) else { return }
+                let playerItem = AVPlayerItem(url: previewURL)
+                
+                
+                cell?.player = AVPlayer(playerItem: playerItem)
+                cell?.showPlayingIcon()
 
-            cell?.player?.play()
-            NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: playerItem, queue: nil) { [weak self] notification in
-                cell?.hidePlayingIcon()
-            }
-            cell?.likeButtonTappedClosure = { cell in
-                   // Button tıklandığında yapılacak işlemler
+                cell?.player?.play()
+                NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: playerItem, queue: nil) { [weak self] notification in
+                    cell?.hidePlayingIcon()
+                }
+            }else if cell?.touchedArea == .rightArea{
+                if coreDataManager.checkDatabase(id: model.data[indexPath.row].id){
+                    cell?.customView.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+                }else{
+                    cell?.customView.likeButton.setImage(UIImage(systemName: "suit.heart.fill"), for: .normal)
+                }
             }
             
         }
     }
+   
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if model is AlbumModel{
             if indexPath.row == 0{

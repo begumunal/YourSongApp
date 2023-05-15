@@ -8,7 +8,7 @@
 import UIKit
 
 class SongListViewController: UIViewController {
-
+    let customView = CustomTableViewCellDetail()
     var selectedIndexId : Int?
     var toolBarTitle : String?
     private let toolBar = CustomToolbar()
@@ -67,25 +67,14 @@ class SongListViewController: UIViewController {
         }
         
     }
-   /* @objc func likeButtonTapped(_ sender: UIButton, model: SongModel) {
-        let indexPath = IndexPath(row: sender.tag, section: 0)
+    
+    /*@objc func likeButtonTapped(_ sender: UIButton, model: SongModel) {
+        /*let indexPath = IndexPath(row: sender.tag, section: 0)
         if checkDatabase(id: model.data[indexPath.row].id){
             self.customTableViewCell.customView.likeButton.setImage(UIImage(systemName: "suit.heart.fill"), for: .normal)
         }else{
             self.customTableViewCell.customView.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        }
+        }*/
     }*/
-    func checkDatabase(id: Int) -> Bool{
-        let coreDataManager = CoreDataManager()
-        if coreDataManager.fetchData(withId: id, deviceID: UIDevice.current.identifierForVendor!.uuidString) != nil {
-            // Veri daha önce kaydedilmiş, silme işlemi yapılacak
-            coreDataManager.deleteData(withId: id, deviceID: UIDevice.current.identifierForVendor!.uuidString)
-            return true
-        } else {
-            // Veri daha önce kaydedilmemiş, kaydetme işlemi yapılacak
-            coreDataManager.saveData(withId: id, deviceID: UIDevice.current.identifierForVendor!.uuidString, isLiked: true)
-            return false
-        }
-
-    }
+ 
 }

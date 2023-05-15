@@ -9,11 +9,19 @@ import Foundation
 import UIKit
 import AVFoundation
 
+enum TouchedArea {
+    case cell
+    case likeButton
+    case rightArea
+}
+
 typealias ButtonTapClosure = (UITableViewCell) -> Void
 class CustomTableViewCell: UITableViewCell {
+    
+    var touchedArea: TouchedArea = .cell
+    let coreDataManager = CoreDataManager()
     var player : AVPlayer?
     let customView = CustomTableViewCellDetail()
-    var likeButtonTappedClosure: ButtonTapClosure?
     override func prepareForReuse() {
         super.prepareForReuse()
         customView.playingIconImageView.isHidden = true
@@ -28,6 +36,7 @@ class CustomTableViewCell: UITableViewCell {
     }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         setupViews()
     }
     
@@ -37,7 +46,7 @@ class CustomTableViewCell: UITableViewCell {
     }
     
     func setupViews() {
-        customView.likeButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+       
         customView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(customView)
 
@@ -51,19 +60,47 @@ class CustomTableViewCell: UITableViewCell {
         customView.layer.cornerRadius = 15
         customView.layer.borderColor = AppColors.secondaryPrimaryColor?.cgColor
     }
+  
     //like butonuna tıkladıysan aynı zamanda cell e tıklanmış olmaması için yazdığım fonk.
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        let buttonRect = customView.likeButton.frame
-        if self.bounds.contains(point) && !buttonRect.contains(point) {
+        let touchAreaRect = CGRect(x: self.bounds.width - 40, y: 0, width: 40, height: self.bounds.height)
+        if touchAreaRect.contains(point) {
+            touchedArea = .rightArea
+            return self
+        } else {
+            touchedArea = .cell
             return super.hitTest(point, with: event)
         }
-        return nil
-    }
-    @objc private func buttonTapped(sender: UIButton) {
-        if let cell = sender.superview?.superview as? CustomTableViewCell {
-            cell.likeButtonTappedClosure?(cell)
+        /*let buttonRect = customView.likeButton.frame
+        
+        if self.bounds.contains(point) && !buttonRect.contains(point) {
+            touchedArea = .cell
+            return super.hitTest(point, with: event)
+        } else if buttonRect.contains(point) {
+            touchedArea = .likeButton
+            return customView.likeButton.hitTest(self.convert(point, to: customView.likeButton), with: event)
         }
+        
+        return nil*/
     }
+   /* func handleLikeButtonTapped(onCell cell: CustomTableViewCell) {
+        
+        if let tableView = cell.superview as? UITableView {
+            guard let indexPath = tableView.indexPath(for: cell) else { return }
+            //let datum = model.data[indexPath.row]
+            if coreDataManager.checkDatabase(id: coreDataManager.id){
+                
+            }
+            if let model = coreDataManager.model as? SongModel{
+               /* if coreDataManager.checkDatabase(id: model.data[indexPath.row]){
+                    
+                }*/
+            }
+            
+        }
+
+    }*/
+    
 }
 
 

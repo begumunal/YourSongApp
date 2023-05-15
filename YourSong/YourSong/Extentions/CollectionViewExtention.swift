@@ -41,22 +41,16 @@ extension CustomCollectionView : UICollectionViewDelegateFlowLayout, UICollectio
         if let model = model as? MusicModel{
             cell.label.text = model.data[indexPath.row].name
             if let url = URL(string: model.data[indexPath.row].picture){
-                if let imageData = try? Data(contentsOf: url) {
-                    if let image = UIImage(data: imageData) {
-                        cell.imageView.image = image
-                        
-                    }
+                loadImage(from: url) { image in
+                    cell.imageView.image = image
                 }
             }
         }
         if let model = model as? ArtistModel{
             cell.label.text = model.data[indexPath.row].name
             if let url = URL(string: model.data[indexPath.row].pictureMedium){
-                if let imageData = try? Data(contentsOf: url) {
-                    if let image = UIImage(data: imageData) {
-                        cell.imageView.image = image
-                        
-                    }
+                loadImage(from: url) { image in
+                    cell.imageView.image = image
                 }
             }
         }
@@ -84,25 +78,42 @@ extension CustomCollectionView : UICollectionViewDelegate{
         }
         if let model = model as? ArtistModel{
             let selectedCellID = model.data[indexPath.row].id
+            if let url = URL(string: model.data[indexPath.row].pictureBig){
+                loadImage(from: url) { image in
+                    let notificationCenter = NotificationCenter.default
+                    
+                    notificationCenter.post(name: Notification.Name("SelectedImageDidChange"), object: nil, userInfo: ["selectedImage": image!])
+                }
+            }
             guard let artistCategoriesVC = self.traverseResponderChain(for: ArtistCategoriesViewController.self) else {
                 return
             }
             let nextVC = AlbumListViewController()
             nextVC.selectedIndexId = selectedCellID
             nextVC.toolBarTitle = model.data[indexPath.row].name
-            if let url = URL(string: model.data[indexPath.row].pictureMedium){
-                if let imageData = try? Data(contentsOf: url) {
-                    if let image = UIImage(data: imageData) {
-                        //let image =
-                        
-                    }
-                }
-            }
+           
             guard let navController = artistCategoriesVC.navigationController else { return }
             navController.pushViewController(nextVC, animated: true)
         }
     }
-    
+    func loadImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
+        if let cachedImage = self.imageCache[url.absoluteString] {
+            completion(cachedImage)
+            return
+        }
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                completion(nil)
+                return
+            }
+            let image = UIImage(data: data)
+            self.imageCache[url.absoluteString] = image
+            
+            DispatchQueue.main.async {
+                completion(image)
+            }
+        }.resume()
+    }
     
 }
 

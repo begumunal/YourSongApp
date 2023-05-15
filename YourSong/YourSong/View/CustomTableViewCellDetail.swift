@@ -75,8 +75,8 @@ class CustomTableViewCellDetail: UIView {
             
             likeButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             likeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            likeButton.widthAnchor.constraint(equalToConstant: 32),
-            likeButton.heightAnchor.constraint(equalToConstant: 32),
+            likeButton.widthAnchor.constraint(equalToConstant: 40),
+            likeButton.heightAnchor.constraint(equalToConstant: 40),
             
             
         ])

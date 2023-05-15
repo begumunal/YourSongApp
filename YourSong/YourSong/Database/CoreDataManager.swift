@@ -10,7 +10,7 @@ import CoreData
 import UIKit
 
 class CoreDataManager {
-
+    var model: SongModel?
     let entityName = "LikedItem"
     let persistentContainer: NSPersistentContainer
   //  let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -73,5 +73,28 @@ class CoreDataManager {
             print("Could not fetch. \(error), \(error.userInfo)")
             return nil
         }
+    }
+    
+    func checkDatabase(id: Int) -> Bool{
+        let coreDataManager = CoreDataManager()
+        if coreDataManager.fetchData(withId: id, deviceID: UIDevice.current.identifierForVendor!.uuidString) != nil {
+            // Veri daha önce kaydedilmiş, silme işlemi yapılacak
+            coreDataManager.deleteData(withId: id, deviceID: UIDevice.current.identifierForVendor!.uuidString)
+            return true
+        } else {
+            // Veri daha önce kaydedilmemiş, kaydetme işlemi yapılacak
+            coreDataManager.saveData(withId: id, deviceID: UIDevice.current.identifierForVendor!.uuidString, isLiked: true)
+            return false
+        }
+
+    }
+    func onlyCheckDatabase(id: Int) -> Bool{
+        let coreDataManager = CoreDataManager()
+        if coreDataManager.fetchData(withId: id, deviceID: UIDevice.current.identifierForVendor!.uuidString) != nil {
+            return true
+        } else {
+            return false
+        }
+
     }
 }

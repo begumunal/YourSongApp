@@ -9,6 +9,9 @@ import Foundation
 import UIKit
 
 class CustomTableView: UITableView {
+    
+    let coreDataManager = CoreDataManager()
+    var mainImage = UIImage()
     var imageCache = [String: UIImage]()
     var model : AnyObject?
     init(frame: CGRect, style: UITableView.Style, model: AnyObject) {
@@ -28,5 +31,11 @@ class CustomTableView: UITableView {
         
         
     }
-    
+    @objc func selectedImageDidChange(_ notification: NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+        
+        if let selectedImage = userInfo["selectedImage"] as? UIImage {
+            mainImage = selectedImage
+        }
+    }
 }
