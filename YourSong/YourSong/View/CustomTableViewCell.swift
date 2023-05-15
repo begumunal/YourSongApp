@@ -46,7 +46,7 @@ class CustomTableViewCell: UITableViewCell {
     }
     
     func setupViews() {
-       
+        self.backgroundColor = AppColors.primaryColor
         customView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(customView)
 

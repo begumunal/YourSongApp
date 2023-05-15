@@ -20,6 +20,7 @@ class CustomTableView: UITableView {
         register(CustomTableViewCell.self, forCellReuseIdentifier: Constants.customTableCellID)
         register(CustomTableViewFirstCell.self, forCellReuseIdentifier: Constants.customTableFirstCellID)
         self.separatorStyle = .none
+        self.backgroundColor = AppColors.primaryColor
         delegate = self
         dataSource = self
     }
@@ -31,11 +32,5 @@ class CustomTableView: UITableView {
         
         
     }
-    @objc func selectedImageDidChange(_ notification: NSNotification) {
-        guard let userInfo = notification.userInfo else { return }
-        
-        if let selectedImage = userInfo["selectedImage"] as? UIImage {
-            mainImage = selectedImage
-        }
-    }
+    
 }

@@ -9,5 +9,6 @@ import Foundation
 import UIKit
 
 enum AppImages{
+    static var artistMainImage = UIImage()
     static let appIconImage = UIImage(named: "AppIconImage")
 }

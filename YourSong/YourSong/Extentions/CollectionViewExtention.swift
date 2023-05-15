@@ -40,7 +40,7 @@ extension CustomCollectionView : UICollectionViewDelegateFlowLayout, UICollectio
         
         if let model = model as? MusicModel{
             cell.label.text = model.data[indexPath.row].name
-            if let url = URL(string: model.data[indexPath.row].picture){
+            if let url = URL(string: model.data[indexPath.row].pictureMedium){
                 loadImage(from: url) { image in
                     cell.imageView.image = image
                 }
@@ -80,9 +80,9 @@ extension CustomCollectionView : UICollectionViewDelegate{
             let selectedCellID = model.data[indexPath.row].id
             if let url = URL(string: model.data[indexPath.row].pictureBig){
                 loadImage(from: url) { image in
-                    let notificationCenter = NotificationCenter.default
-                    
-                    notificationCenter.post(name: Notification.Name("SelectedImageDidChange"), object: nil, userInfo: ["selectedImage": image!])
+                    //let notificationCenter = NotificationCenter.default
+                    AppImages.artistMainImage = image!
+                    //notificationCenter.post(name: Notification.Name("SelectedImageDidChange"), object: nil, userInfo: ["selectedImage": image!])
                 }
             }
             guard let artistCategoriesVC = self.traverseResponderChain(for: ArtistCategoriesViewController.self) else {

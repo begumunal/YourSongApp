@@ -39,8 +39,12 @@ extension CustomTableView : UITableViewDelegate, UITableViewDataSource{
                 let cell = tableView.dequeueReusableCell(withIdentifier: Constants.customTableFirstCellID, for: indexPath) as! CustomTableViewFirstCell
                 cell.isUserInteractionEnabled = false
                 let notificationCenter = NotificationCenter.default
-                notificationCenter.addObserver(self, selector: #selector(selectedImageDidChange(_:)), name: Notification.Name("SelectedImageDidChange"), object: nil)
-                cell.artistMainImage.image = self.mainImage
+                
+                DispatchQueue.main.async {
+                   
+                    cell.artistMainImage.image = AppImages.artistMainImage
+                }
+               
                 return cell
             }else{
                 _ = CustomTableViewCell(style: .default, reuseIdentifier: Constants.customTableCellID)
@@ -150,13 +154,33 @@ extension CustomTableView : UITableViewDelegate, UITableViewDataSource{
                 }
             }
             
+        }else{
+            if let result = coreDataManager.fetchCoreDataObjects(){
+                
+                let cell = tableView.cellForRow(at: indexPath) as? CustomTableViewCell
+                
+                if cell?.touchedArea == .cell{
+                    
+                }else if cell?.touchedArea == .likeButton{
+                    if coreDataManager.checkDatabase(id: Int(result[indexPath.row].id)){
+                        cell?.customView.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+                        
+                        tableView.deleteRows(at: [indexPath], with: .fade)
+                    }else{
+                        cell?.customView.likeButton.setImage(UIImage(systemName: "suit.heart.fill"), for: .normal)
+                        
+                    }
+                }
+                
+            }
+           
         }
     }
    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if model is AlbumModel{
             if indexPath.row == 0{
-                return 200
+                return 300
             }else{
                 return 85 // hücre yüksekliği
             }
@@ -192,4 +216,5 @@ extension CustomTableView : UITableViewDelegate, UITableViewDataSource{
         
         return String(format: "%02d:%02d:%02d", hours, minutes, remainingSeconds)
     }
+   
 }

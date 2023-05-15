@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3318E9252A120B7400A96AF5 /* CellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3318E9242A120B7400A96AF5 /* CellProtocol.swift */; };
 		33DF02182A092D9200D2FB6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF02172A092D9200D2FB6A /* AppDelegate.swift */; };
 		33DF021A2A092D9200D2FB6A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF02192A092D9200D2FB6A /* SceneDelegate.swift */; };
 		33DF021C2A092D9200D2FB6A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF021B2A092D9200D2FB6A /* SplashViewController.swift */; };
@@ -44,7 +43,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3318E9242A120B7400A96AF5 /* CellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellProtocol.swift; sourceTree = "<group>"; };
 		33DF02142A092D9200D2FB6A /* YourSong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourSong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33DF02172A092D9200D2FB6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33DF02192A092D9200D2FB6A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 				33DF02232A092D9400D2FB6A /* Assets.xcassets */,
 				33DF02252A092D9400D2FB6A /* LaunchScreen.storyboard */,
 				33DF02282A092D9400D2FB6A /* Info.plist */,
-				3318E9242A120B7400A96AF5 /* CellProtocol.swift */,
 			);
 			path = YourSong;
 			sourceTree = "<group>";
@@ -308,7 +305,6 @@
 				33DF023E2A0A415C00D2FB6A /* CustomCollectionViewCell.swift in Sources */,
 				33DF02402A0A5F5D00D2FB6A /* Constants.swift in Sources */,
 				33DF025D2A0C133500D2FB6A /* CustomTableViewFirstCell.swift in Sources */,
-				3318E9252A120B7400A96AF5 /* CellProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,6 +443,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YourSong/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -473,6 +470,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YourSong/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

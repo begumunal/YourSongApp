@@ -33,11 +33,13 @@ class CustomTableViewCellDetail: UIView {
         addSubview(imageView)
     
         nameLabel.numberOfLines = 0
+        nameLabel.textColor = .black
         nameLabel.font = UIFont.systemFont(ofSize: 14)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(nameLabel)
         
         infoLabel.numberOfLines = 0
+        infoLabel.textColor = .black
         infoLabel.font = UIFont.systemFont(ofSize: 11)
         infoLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(infoLabel)
