@@ -46,8 +46,7 @@ class SongListViewController: UIViewController {
               
                 DispatchQueue.main.async {
                     self.albumDetail = CustomTableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height), style: .plain, model: model)
-                    //self.customTableViewCell.customView.likeButton.addTarget(self, action: #selector(self.likeButtonTapped(_:model:)), for: .touchUpInside)
-
+                
                     self.albumDetail.translatesAutoresizingMaskIntoConstraints = false
                     
                     self.view.addSubview(self.albumDetail)
@@ -68,13 +67,4 @@ class SongListViewController: UIViewController {
         
     }
     
-    /*@objc func likeButtonTapped(_ sender: UIButton, model: SongModel) {
-        /*let indexPath = IndexPath(row: sender.tag, section: 0)
-        if checkDatabase(id: model.data[indexPath.row].id){
-            self.customTableViewCell.customView.likeButton.setImage(UIImage(systemName: "suit.heart.fill"), for: .normal)
-        }else{
-            self.customTableViewCell.customView.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        }*/
-    }*/
- 
 }

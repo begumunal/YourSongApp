@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class CustomTableView: UITableView {
-    
+    let networkManager = NetworkManager()
     let coreDataManager = CoreDataManager()
     var mainImage = UIImage()
     var imageCache = [String: UIImage]()

@@ -24,6 +24,9 @@ extension CustomTableView : UITableViewDelegate, UITableViewDataSource{
             return model.data.count
         }
         else{
+            if let result = coreDataManager.fetchCoreDataObjects(){
+                return result.count
+            }
             return 0
         }
     }
@@ -79,6 +82,30 @@ extension CustomTableView : UITableViewDelegate, UITableViewDataSource{
         else{
             _ = CustomTableViewCell(style: .default, reuseIdentifier: Constants.customTableCellID)
             let cell = tableView.dequeueReusableCell(withIdentifier: Constants.customTableCellID, for: indexPath) as! CustomTableViewCell
+            if let result = coreDataManager.fetchCoreDataObjects(){
+   
+                networkManager.fetchData(urlString: "https://api.deezer.com/track/\(result[indexPath.row].id)", decodingType: SongDatum.self) {(result: Result<SongDatum, Error>)  in
+                    switch result {
+                    case .success(let model):
+                        
+                        DispatchQueue.main.async {
+                            cell.customView.nameLabel.text = model.title
+                            cell.customView.infoLabel.text = self.formatDuration(seconds: (model.duration))
+                            let md5image = model.md5Image
+                            if let url = URL(string: "https://e-cdns-images.dzcdn.net/images/cover/\(md5image)/56x56-000000-80-0-0.jpg") {
+                                self.loadImage(from: url) { image in
+                                    cell.imageView?.image = image
+                                }
+                            }
+                            cell.customView.likeButton.setImage(UIImage(systemName: "suit.heart.fill"), for: .normal)
+                        }
+                        
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+                
+            }
             return cell
         }
  
@@ -97,8 +124,6 @@ extension CustomTableView : UITableViewDelegate, UITableViewDataSource{
             navController.pushViewController(nextVC, animated: true)
            
         }else if let model = model as? SongModel{
-            
-            //TIKLANAN ŞARKININ KISA BİR DİNLEMESİ OLACAK
            
             let cell = tableView.cellForRow(at: indexPath) as? CustomTableViewCell
             
@@ -117,7 +142,7 @@ extension CustomTableView : UITableViewDelegate, UITableViewDataSource{
                 NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: playerItem, queue: nil) { [weak self] notification in
                     cell?.hidePlayingIcon()
                 }
-            }else if cell?.touchedArea == .rightArea{
+            }else if cell?.touchedArea == .likeButton{
                 if coreDataManager.checkDatabase(id: model.data[indexPath.row].id){
                     cell?.customView.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
                 }else{

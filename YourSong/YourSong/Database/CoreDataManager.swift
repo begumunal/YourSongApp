@@ -97,4 +97,21 @@ class CoreDataManager {
         }
 
     }
+    
+    func fetchCoreDataObjects() -> [LikedItem]? {
+        let fetchRequest: NSFetchRequest<LikedItem> = LikedItem.fetchRequest()
+        
+        do {
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                let managedObjectContext = appDelegate.persistentContainer.viewContext
+                let results = try managedObjectContext.fetch(fetchRequest)
+                return results
+            }
+            return nil
+        } catch {
+            print("Hata: Veri çekme işlemi başarısız oldu - \(error.localizedDescription)")
+            return nil
+        }
+    }
+
 }
